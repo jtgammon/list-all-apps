@@ -1,0 +1,13 @@
+package: github.com/ecsteam/docker-usage
+import:
+- package: github.com/bradfitz/slice
+- package: github.com/cloudfoundry/cli
+  subpackages:
+  - plugin
+- package: github.com/ecsteam/cfcli-plugin-utils
+  subpackages:
+  - plugin/io
+- package: github.com/krujos/cfcurl
+testImport:
+- package: github.com/onsi/ginkgo
+- package: github.com/onsi/gomega
