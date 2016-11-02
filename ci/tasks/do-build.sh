@@ -20,5 +20,5 @@ for os in linux windows darwin; do
         suffix="macosx"
     fi
 
-    GOOS=${os} GOARCH=amd64 go build -ldflags="-X github.com/ecsteam/docker-usage/command.version=`cat ${version_file}`" -o ${build_dir}/docker-usage-${suffix}
+    GOOS=${os} go build -ldflags="-X github.com/ecsteam/docker-usage/command.version=`cat ${version_file}`" -o ${build_dir}/docker-usage-${suffix}
 done
