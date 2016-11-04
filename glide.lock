@@ -1,5 +1,5 @@
 hash: 06df4e7676450b373d1baae36ca3318482f8d31f6bfc180ab3cb7ee10e281bac
-updated: 2016-11-04T10:45:18.132899537-05:00
+updated: 2016-11-04T10:50:32.599247392-05:00
 imports:
 - name: code.cloudfoundry.org/cli
   version: c5c9c8be7539015496063ee597fa1a63567fbf63
@@ -32,7 +32,7 @@ imports:
   version: 533cd7fd8a85905f67a1753afb4deddc85ea174f
   repo: https://github.com/fatih/color
 - name: github.com/jtgammon/list-all-apps
-  version: c6dde42b4a771a840582dc6ddf7fd5c619a6ac01
+  version: a4f5d63f521acf90fe2a3ebb6b10c48527a1de3b
   subpackages:
   - command
 - name: github.com/krujos/cfcurl

@@ -20,7 +20,7 @@ import (
 	"os"
 	"regexp"
 
-	. "github.com/ecsteam/docker-usage/command"
+	. "github.com/jtgammon/list-all-apps/command"
 
 	"github.com/cloudfoundry/cli/plugin/pluginfakes"
 	pluginio "github.com/ecsteam/cfcli-plugin-utils/plugin/io"
@@ -32,7 +32,7 @@ import (
 var _ = Describe("Docker-Usage", func() {
 	var fakeCliConnection *pluginfakes.FakeCliConnection
 
-	var convertCommandOutputToStringSlice func(cmd *DockerUsagePlugin) []string
+	var convertCommandOutputToStringSlice func(cmd *ListAllAppsPlugin) []string
 
 	var decolorizerRegex = regexp.MustCompile(`\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]`)
 
@@ -63,7 +63,7 @@ var _ = Describe("Docker-Usage", func() {
 			return string(decolorizerRegex.ReplaceAll([]byte(message), []byte("")))
 		}
 
-		convertCommandOutputToStringSlice = func(cmd *DockerUsagePlugin) []string {
+		convertCommandOutputToStringSlice = func(cmd *ListAllAppsPlugin) []string {
 			var lines []string
 			scanner := bufio.NewScanner(bytes.NewBuffer(cmd.UI.Writer().(*bytes.Buffer).Bytes()))
 			for scanner.Scan() {
@@ -79,7 +79,7 @@ var _ = Describe("Docker-Usage", func() {
 		var output io.Writer
 		var input io.Reader
 
-		var cmd *DockerUsagePlugin
+		var cmd *ListAllAppsPlugin
 		BeforeEach(func() {
 			output = new(bytes.Buffer)
 			input = new(bytes.Buffer)

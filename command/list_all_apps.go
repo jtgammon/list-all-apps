@@ -66,14 +66,14 @@ func (cmd *ListAllAppsPlugin) Start() {
 // GetMetadata - get metadata
 func (cmd *ListAllAppsPlugin) GetMetadata() plugin.PluginMetadata {
 	return plugin.PluginMetadata{
-		Name:    "docker-usage",
+		Name:    "list-all-apps",
 		Version: pluginversion.GetVersionType(version),
 		Commands: []plugin.Command{
 			{
-				Name:     "docker-usage",
-				HelpText: "Show all docker images deployed in the foundation",
+				Name:     "list-all-apps",
+				HelpText: "List all apps in the foundation, sorted by Org and Space",
 				UsageDetails: plugin.Usage{
-					Usage: "cf docker-usage",
+					Usage: "cf list-all-apps",
 				},
 			},
 		},
