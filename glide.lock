@@ -1,30 +1,28 @@
-hash: 99c24a5d357174caa0d8e1a3eb618f491275752dbc3e0278fa367c7c300e90a9
-updated: 2016-10-26T23:23:25.291634106-04:00
+hash: 06df4e7676450b373d1baae36ca3318482f8d31f6bfc180ab3cb7ee10e281bac
+updated: 2016-11-04T10:45:18.132899537-05:00
 imports:
 - name: code.cloudfoundry.org/cli
-  version: ada5bac115871cfdcab28e249dcc206c04bc2238
+  version: c5c9c8be7539015496063ee597fa1a63567fbf63
   subpackages:
-  - cf
-  - cf/configuration
+  - plugin/models
   - cf/configuration/coreconfig
-  - cf/formatters
+  - cf/configuration
   - cf/i18n
   - cf/models
-  - cf/resources
+  - cf
   - cf/trace
-  - plugin
-  - plugin/models
+  - cf/resources
+  - cf/formatters
 - name: github.com/blang/semver
   version: 60ec3488bfea7cca02b021d106d9911120d25fe9
   repo: https://github.com/blang/semver
 - name: github.com/bradfitz/slice
   version: d9036e2120b5ddfa53f3ebccd618c4af275f47da
 - name: github.com/cloudfoundry/cli
-  version: ada5bac115871cfdcab28e249dcc206c04bc2238
+  version: c5c9c8be7539015496063ee597fa1a63567fbf63
   subpackages:
-  - cf/terminal
   - plugin
-  - plugin/pluginfakes
+  - cf/terminal
 - name: github.com/ecsteam/cfcli-plugin-utils
   version: 713fa50dd722acfcd44dbcfd70283e5695635dd9
   subpackages:
@@ -33,6 +31,10 @@ imports:
 - name: github.com/fatih/color
   version: 533cd7fd8a85905f67a1753afb4deddc85ea174f
   repo: https://github.com/fatih/color
+- name: github.com/jtgammon/list-all-apps
+  version: c6dde42b4a771a840582dc6ddf7fd5c619a6ac01
+  subpackages:
+  - command
 - name: github.com/krujos/cfcurl
   version: 320854091a119f220102ba356e507c361562b221
 - name: github.com/mattn/go-colorable
@@ -46,8 +48,8 @@ imports:
   repo: https://github.com/nicksnyder/go-i18n
   subpackages:
   - i18n
-  - i18n/bundle
   - i18n/language
+  - i18n/bundle
   - i18n/translation
 - name: go4.org
   version: 399a9d7bfe85437346a5ec4ef0450fc2f1084e61
@@ -69,35 +71,4 @@ imports:
 - name: gopkg.in/yaml.v2
   version: e4d366fc3c7938e2958e662b4258c7a89e1f0e3e
   repo: https://gopkg.in/yaml.v2
-testImports:
-- name: github.com/onsi/ginkgo
-  version: 7d3240191d7b2311b60090fcbc96e56bffc45ec0
-  subpackages:
-  - config
-  - internal/codelocation
-  - internal/containernode
-  - internal/failer
-  - internal/leafnodes
-  - internal/remote
-  - internal/spec
-  - internal/specrunner
-  - internal/suite
-  - internal/testingtproxy
-  - internal/writer
-  - reporters
-  - reporters/stenographer
-  - types
-- name: github.com/onsi/gomega
-  version: 9ed8da19f2156b87a803a8fdf6d126f627a12db1
-  subpackages:
-  - format
-  - internal/assertion
-  - internal/asyncassertion
-  - internal/oraclematcher
-  - internal/testingtsupport
-  - matchers
-  - matchers/support/goraph/bipartitegraph
-  - matchers/support/goraph/edge
-  - matchers/support/goraph/node
-  - matchers/support/goraph/util
-  - types
+devImports: []

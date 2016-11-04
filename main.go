@@ -14,7 +14,7 @@ package main
 
 import (
 	"github.com/cloudfoundry/cli/plugin"
-	"github.com/ecsteam/docker-usage/command"
+	"github.com/jtgammon/list-all-apps/command"
 )
 
 func main() {

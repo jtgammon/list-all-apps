@@ -36,13 +36,13 @@ type appLocator struct {
 
 var version = "0.0.1"
 
-// DockerUsagePlugin - the main struct
-type DockerUsagePlugin struct {
+// ListAllAppsPlugin - the main struct
+type ListAllAppsPlugin struct {
 	UI io.UI
 }
 
 // New - create new plugin with stdin and stdout
-func New() *DockerUsagePlugin {
+func New() *ListAllAppsPlugin {
 	ui := io.UI{
 		Input:  os.Stdin,
 		Output: io.Writer,
@@ -52,19 +52,19 @@ func New() *DockerUsagePlugin {
 }
 
 // NewPlugin - create new plugin with specified io
-func NewPlugin(ui io.UI) *DockerUsagePlugin {
-	return &DockerUsagePlugin{
+func NewPlugin(ui io.UI) *ListAllAppsPlugin {
+	return &ListAllAppsPlugin{
 		UI: ui,
 	}
 }
 
 // Start - start
-func (cmd *DockerUsagePlugin) Start() {
+func (cmd *ListAllAppsPlugin) Start() {
 	plugin.Start(cmd)
 }
 
 // GetMetadata - get metadata
-func (cmd *DockerUsagePlugin) GetMetadata() plugin.PluginMetadata {
+func (cmd *ListAllAppsPlugin) GetMetadata() plugin.PluginMetadata {
 	return plugin.PluginMetadata{
 		Name:    "docker-usage",
 		Version: pluginversion.GetVersionType(version),
@@ -81,7 +81,7 @@ func (cmd *DockerUsagePlugin) GetMetadata() plugin.PluginMetadata {
 }
 
 // Run -
-func (cmd *DockerUsagePlugin) Run(cli plugin.CliConnection, args []string) {
+func (cmd *ListAllAppsPlugin) Run(cli plugin.CliConnection, args []string) {
 	defer func() {
 		// recover from panic if one occured. Set err to nil otherwise.
 		if recover() != nil {
