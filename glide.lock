@@ -1,5 +1,5 @@
 hash: 06df4e7676450b373d1baae36ca3318482f8d31f6bfc180ab3cb7ee10e281bac
-updated: 2016-11-04T11:38:45.670193958-05:00
+updated: 2016-11-04T13:33:08.499488107-05:00
 imports:
 - name: code.cloudfoundry.org/cli
   version: c5c9c8be7539015496063ee597fa1a63567fbf63
@@ -31,10 +31,6 @@ imports:
 - name: github.com/fatih/color
   version: 533cd7fd8a85905f67a1753afb4deddc85ea174f
   repo: https://github.com/fatih/color
-- name: github.com/jtgammon/list-all-apps
-  version: aac0d26236d86b838f6d27d3a3723ef8d912e769
-  subpackages:
-  - command
 - name: github.com/krujos/cfcurl
   version: 320854091a119f220102ba356e507c361562b221
 - name: github.com/mattn/go-colorable

@@ -31,7 +31,7 @@ type orgSpaceInfo struct {
 type appLocator struct {
 	orgSpaceInfo
 	Name        string
-//	DockerImage string
+	Memory      string
 }
 
 var version = "0.0.1"
@@ -109,9 +109,9 @@ func (cmd *ListAllAppsPlugin) Run(cli plugin.CliConnection, args []string) {
 		return
 	}
 
-	table := cmd.UI.Table([]string{"org", "space", "application"})
+	table := cmd.UI.Table([]string{"application", "org", "space", "memory"})
 	for _, app := range apps {
-		table.Add(app.OrgName, app.SpaceName, app.Name)
+		table.Add(app.Name, app.OrgName, app.SpaceName, app.Memory)
 	}
 
 	table.Print()
@@ -138,13 +138,8 @@ func getApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 			app := toJSONObject(appIntf)
 			appEntity := toJSONObject(app["entity"])
 			appName := appEntity["name"].(string)
+			appMemory := appEntity["name"].(string)
 			appSpaceURL := appEntity["space_url"].(string)
-
-//			dockerImageInterface := appEntity["docker_image"]
-//
-//			if dockerImageInterface == nil {
-//				continue
-//			}
 
 			if orgSpaceMap[appSpaceURL] == nil {
 				orgSpaceMap[appSpaceURL], err = getOrgSpaceInfo(cli, appSpaceURL)
@@ -158,8 +153,8 @@ func getApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 			appInfo := appLocator{
 				orgSpaceInfo: *info,
 				Name:         appName,
-//				DockerImage:  dockerImageInterface.(string),
-			}
+				Memory:       appMemory,
+ 			}
 
 			apps = append(apps, appInfo)
 		}
