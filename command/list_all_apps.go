@@ -31,7 +31,7 @@ type orgSpaceInfo struct {
 type appLocator struct {
 	orgSpaceInfo
 	Name        string
-	DockerImage string
+//	DockerImage string
 }
 
 var version = "0.0.1"
@@ -92,9 +92,9 @@ func (cmd *ListAllAppsPlugin) Run(cli plugin.CliConnection, args []string) {
 		return
 	}
 
-	cmd.UI.Say("Finding which apps use Docker images ...\n")
+	cmd.UI.Say("List all apps in the foundation...\n")
 
-	apps, err := getDockerApps(cli)
+	apps, err := getApps(cli)
 
 	if err != nil {
 		cmd.UI.Failed("Error completing request: %v", err)
@@ -109,16 +109,16 @@ func (cmd *ListAllAppsPlugin) Run(cli plugin.CliConnection, args []string) {
 		return
 	}
 
-	table := cmd.UI.Table([]string{"image", "org", "space", "application"})
+	table := cmd.UI.Table([]string{"org", "space", "application"})
 	for _, app := range apps {
-		table.Add(app.DockerImage, app.OrgName, app.SpaceName, app.Name)
+		table.Add(app.OrgName, app.SpaceName, app.Name)
 	}
 
 	table.Print()
 	return
 }
 
-func getDockerApps(cli plugin.CliConnection) (apps []appLocator, err error) {
+func getApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 	apps = make([]appLocator, 0, 5)
 	orgSpaceMap := make(map[string]*orgSpaceInfo)
 
@@ -140,11 +140,11 @@ func getDockerApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 			appName := appEntity["name"].(string)
 			appSpaceURL := appEntity["space_url"].(string)
 
-			dockerImageInterface := appEntity["docker_image"]
-
-			if dockerImageInterface == nil {
-				continue
-			}
+//			dockerImageInterface := appEntity["docker_image"]
+//
+//			if dockerImageInterface == nil {
+//				continue
+//			}
 
 			if orgSpaceMap[appSpaceURL] == nil {
 				orgSpaceMap[appSpaceURL], err = getOrgSpaceInfo(cli, appSpaceURL)
@@ -158,7 +158,7 @@ func getDockerApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 			appInfo := appLocator{
 				orgSpaceInfo: *info,
 				Name:         appName,
-				DockerImage:  dockerImageInterface.(string),
+//				DockerImage:  dockerImageInterface.(string),
 			}
 
 			apps = append(apps, appInfo)
@@ -170,11 +170,6 @@ func getDockerApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 	slice.Sort(apps, func(i, j int) bool {
 		locator1, locator2 := apps[i], apps[j]
 
-		if locator1.DockerImage < locator2.DockerImage {
-			return true
-		} else if locator1.DockerImage > locator2.DockerImage {
-			return false
-		}
 		if locator1.OrgName < locator2.OrgName {
 			return true
 		} else if locator1.OrgName > locator2.OrgName {

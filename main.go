@@ -14,7 +14,8 @@ package main
 
 import (
 	"github.com/cloudfoundry/cli/plugin"
-	"github.com/jtgammon/list-all-apps/command"
+//	"github.com/jtgammon/list-all-apps/command"
+  "list-all-apps/command"
 )
 
 func main() {
