@@ -15,6 +15,7 @@ package command
 
 import (
 	"os"
+	"strconv"
 
 	"github.com/bradfitz/slice"
 	"github.com/cloudfoundry/cli/plugin"
@@ -138,8 +139,10 @@ func getApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 			app := toJSONObject(appIntf)
 			appEntity := toJSONObject(app["entity"])
 			appName := appEntity["name"].(string)
-			appMemory := appEntity["name"].(string)
+			appMemoryFloat := appEntity["memory"].(float64)
 			appSpaceURL := appEntity["space_url"].(string)
+
+			appMemory := strconv.FormatFloat(appMemoryFloat, 'f', -1, 64)
 
 			if orgSpaceMap[appSpaceURL] == nil {
 				orgSpaceMap[appSpaceURL], err = getOrgSpaceInfo(cli, appSpaceURL)
