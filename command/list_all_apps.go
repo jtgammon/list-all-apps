@@ -33,6 +33,7 @@ type appLocator struct {
 	orgSpaceInfo
 	Name        string
 	Memory      string
+	Disk        string
 }
 
 var version = "0.0.1"
@@ -110,9 +111,9 @@ func (cmd *ListAllAppsPlugin) Run(cli plugin.CliConnection, args []string) {
 		return
 	}
 
-	table := cmd.UI.Table([]string{"application", "org", "space", "memory"})
+	table := cmd.UI.Table([]string{"application", "org", "space", "memory", "disk"})
 	for _, app := range apps {
-		table.Add(app.Name, app.OrgName, app.SpaceName, app.Memory)
+		table.Add(app.Name, app.OrgName, app.SpaceName, app.Memory, app.Disk)
 	}
 
 	table.Print()
@@ -139,10 +140,9 @@ func getApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 			app := toJSONObject(appIntf)
 			appEntity := toJSONObject(app["entity"])
 			appName := appEntity["name"].(string)
-			appMemoryFloat := appEntity["memory"].(float64)
+			appMemory := strconv.FormatFloat(appEntity["memory"].(float64), 'f', -1, 64)
+			appDisk := strconv.FormatFloat(appEntity["disk_quota"].(float64), 'f', -1, 64)
 			appSpaceURL := appEntity["space_url"].(string)
-
-			appMemory := strconv.FormatFloat(appMemoryFloat, 'f', -1, 64)
 
 			if orgSpaceMap[appSpaceURL] == nil {
 				orgSpaceMap[appSpaceURL], err = getOrgSpaceInfo(cli, appSpaceURL)
@@ -157,6 +157,7 @@ func getApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 				orgSpaceInfo: *info,
 				Name:         appName,
 				Memory:       appMemory,
+				Disk:         appDisk,
  			}
 
 			apps = append(apps, appInfo)
