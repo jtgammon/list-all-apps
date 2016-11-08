@@ -34,6 +34,7 @@ type appLocator struct {
 	Name        string
 	Memory      string
 	Disk        string
+	Instances   string
 }
 
 var version = "0.0.1"
@@ -111,9 +112,9 @@ func (cmd *ListAllAppsPlugin) Run(cli plugin.CliConnection, args []string) {
 		return
 	}
 
-	table := cmd.UI.Table([]string{"application", "org", "space", "memory", "disk"})
+	table := cmd.UI.Table([]string{"application", "org", "space", "instances", "memory", "disk"})
 	for _, app := range apps {
-		table.Add(app.Name, app.OrgName, app.SpaceName, app.Memory, app.Disk)
+		table.Add(app.Name, app.OrgName, app.SpaceName, app.Instances, app.Memory, app.Disk)
 	}
 
 	table.Print()
@@ -142,6 +143,8 @@ func getApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 			appName := appEntity["name"].(string)
 			appMemory := strconv.FormatFloat(appEntity["memory"].(float64), 'f', -1, 64)
 			appDisk := strconv.FormatFloat(appEntity["disk_quota"].(float64), 'f', -1, 64)
+			appInstances := strconv.FormatFloat(appEntity["instances"].(float64), 'f', -1, 64)
+
 			appSpaceURL := appEntity["space_url"].(string)
 
 			if orgSpaceMap[appSpaceURL] == nil {
@@ -158,6 +161,7 @@ func getApps(cli plugin.CliConnection) (apps []appLocator, err error) {
 				Name:         appName,
 				Memory:       appMemory,
 				Disk:         appDisk,
+				Instances:    appInstances,
  			}
 
 			apps = append(apps, appInfo)
